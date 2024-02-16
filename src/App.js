@@ -14,6 +14,7 @@ function App() {
     useEffect(()=>{
         fetchMovies()
     },[])
+    
   return (
     <div className="m-4 min-h-screen bg-gray-100 flex justify-center items-start">
       <Videoplayer movies = {movies}/>
