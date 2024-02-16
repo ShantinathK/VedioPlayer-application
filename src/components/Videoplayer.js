@@ -42,6 +42,9 @@ const Videoplayer = ({ movies }) => {
     }
     setIsPlaying(!isPlaying);
   };
+  if(isPlaying){
+    videoRef.current.play();
+  }
 
   // update time as vedio plays
   const handleTimeUpdate = () => {
@@ -111,7 +114,7 @@ const Videoplayer = ({ movies }) => {
       setMetadataLoaded(false); // Reset metadataLoaded when changing video
       setIsPlaying(false);
       setTimeout(() => {
-        videoRef.current.play();
+        // videoRef.current.play();
         setIsPlaying(true);
       }, 1000);
     }
@@ -126,7 +129,7 @@ const Videoplayer = ({ movies }) => {
       setMetadataLoaded(false); // Reset metadataLoaded when changing video
       setIsPlaying(false);
       setTimeout(() => {
-        videoRef.current.play();
+        // videoRef.current.play();
         setIsPlaying(true);
       }, 1000);
     }
@@ -211,6 +214,7 @@ const Videoplayer = ({ movies }) => {
           setCurrentVideo={setCurrentVideo}
           setCurrentTitle={setCurrentTitle}
           setIsPlaying={setIsPlaying}
+         
         />
       </div>
     </div>
