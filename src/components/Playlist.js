@@ -5,6 +5,9 @@ const Playlist = ({ playlist, setCurrentVideo, setCurrentTitle, setIsPlaying }) 
     setCurrentVideo(video);
     setCurrentTitle(video);
     setIsPlaying(false); //when vedio changed from playlist, it should pause 1st after that it should play once clicked
+    setTimeout(() => {
+      setIsPlaying(true);
+    }, 1000);
   };
 
   return (
