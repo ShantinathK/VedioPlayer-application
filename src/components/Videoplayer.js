@@ -148,16 +148,11 @@ const Videoplayer = ({ movies }) => {
         onEnded={handleVideoEnd}
         onClick={playPauseToggle}
         onLoadedMetadata={() => setMetadataLoaded(false)} // Reset metadataLoaded state when new video loaded
-        className="bg-black w-[1000px] h-[400px]"
+        className="bg-black sm:w-[1000px] sm:h-[400px]"
       />
-
-      {/* {!isPlaying && (
-        <button onClick={playPauseToggle} className="absolute inset-1">
-          {isPlaying ? <IoPause /> : <IoPlay />}
-        </button>
-      )} */}
-      <div className="w-full p-2 flex justify-between">
-        <div className="w-full flex justify-start gap-4 items-center">
+      <div className=" w-full p-2 flex sm:justify-between">
+        <div className="w-full flex sm:flex-row flex-col justify-start gap-4 items-center">
+          <div className="flex flex-row">
           <button onClick={playpreviousToggle}>
             <FaStepBackward />
           </button>
@@ -167,7 +162,7 @@ const Videoplayer = ({ movies }) => {
           <button onClick={playnextToggle}>
             <FaStepForward />
           </button>
-          <div>
+         
             <input
               type="range"
               min={0}
@@ -179,13 +174,14 @@ const Videoplayer = ({ movies }) => {
               {currentTime.toFixed(2)} /{" "}
               {duration ? duration.toFixed(2) : (0.0).toFixed(2)}
             </span>
+            </div>
             <span className="w-full px-2 font-semibold">
               {currentTitle.title}
             </span>
-          </div>
+          
         </div>
         
-        <div className="w-full flex justify-end gap-6 items-end ">
+        <div className="w-full flex sm:flex-row flex-col justify-end gap-6 items-end ">
         <div className="w-fit">
           <button onClick={autoPlay} className="flex flex-row justify-center items-center gap-2">
             <FaRegPlayCircle />
