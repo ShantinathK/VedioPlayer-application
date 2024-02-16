@@ -16,7 +16,7 @@ const Playlist = ({ playlist, setCurrentVideo, setCurrentTitle, setIsPlaying }) 
       <h2 className="text-lg font-semibold mb-2">Playlist</h2>
       <ul className='flex flex-col justify-center items-center border border-white'>
         {playlist.map((video, index) => (
-          <li key={video.id} className="w-full p-2 cursor-pointer text-white border border-white" onClick={() => handleVideoSelect(video)} >
+          <li key={video.id} className="w-full p-2 sm:cursor-pointer text-white border border-white" onClick={() => handleVideoSelect(video)} >
             {index+1}. {video.title}
           </li>
         ))}
