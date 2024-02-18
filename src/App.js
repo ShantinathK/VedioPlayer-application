@@ -38,6 +38,7 @@ function App() {
     
   return (
     <div className="m-4 min-h-screen bg-gray-100 flex flex-col justify-center items-center gap-2">
+      
       <Videoplayer movies = {movies}/>
 
       <div className='flex justify-center items-center gap-2'>

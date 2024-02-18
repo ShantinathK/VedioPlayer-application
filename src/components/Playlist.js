@@ -12,9 +12,9 @@ const Playlist = ({ playlist, setCurrentVideo, setCurrentTitle, setIsPlaying }) 
   };
 
   return (
-    <div className="mt-4 flex flex-col justify-center items-center">
+    <div className="mt-4 p-6 flex flex-col justify-center items-center">
       <h2 className="text-lg font-semibold mb-2">Playlist</h2>
-      <ul className='flex flex-col justify-center items-center border border-white'>
+      <ul className='mb-6 flex flex-col justify-center items-center border border-white'>
         {playlist.map((video, index) => (
           <li key={video.id} className="w-full p-2 sm:cursor-pointer text-white border border-white" onClick={() => handleVideoSelect(video)} >
             {index+1}. {video.title}

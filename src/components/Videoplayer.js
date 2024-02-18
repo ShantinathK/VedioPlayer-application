@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import Playlist from "./Playlist";
 import { IoPause, IoPlay } from "react-icons/io5";
 import { FaStepForward, FaStepBackward, FaRegPlayCircle } from "react-icons/fa";
-import './VideoPlayer.css';
+import "./VideoPlayer.css";
 
 const Videoplayer = ({ movies }) => {
   const [playlist, setPlaylist] = useState([]);
@@ -42,7 +42,7 @@ const Videoplayer = ({ movies }) => {
     }
     setIsPlaying(!isPlaying);
   };
-  if(isPlaying){
+  if (isPlaying) {
     videoRef.current.play();
   }
 
@@ -141,6 +141,9 @@ const Videoplayer = ({ movies }) => {
 
   return (
     <div className="flex flex-col items-center">
+      <h1 className="my-2 text-purple-700 place-self-start text-xl font-bold font-serif	">
+        Vedio Player Application
+      </h1>
       <video
         ref={videoRef}
         src={currentVideo ? currentVideo.src : ""}
@@ -150,19 +153,19 @@ const Videoplayer = ({ movies }) => {
         onLoadedMetadata={() => setMetadataLoaded(false)} // Reset metadataLoaded state when new video loaded
         className="bg-black sm:w-[1000px] sm:h-[400px]"
       />
-      <div className="w-full p-2 flex sm:justify-between">
-        <div className="flex sm:flex-row flex-col justify-between gap-4 items-center">
-          <div className="w-full flex flex-row justify-center">
-          <button onClick={playpreviousToggle}>
-            <FaStepBackward />
-          </button>
-          <button onClick={playPauseToggle}>
-            {isPlaying ? <IoPause /> : <IoPlay />}
-          </button>
-          <button onClick={playnextToggle}>
-            <FaStepForward />
-          </button>
-         
+      <div className="w-full p-2 flex sm:flex-row flex-col sm:justify-between">
+        <div className="w-full flex sm:flex-row flex-col sm:justify-between justify-center  sm:gap-4 items-center">
+          <div className="w-fit flex flex-row justify-center">
+            <button onClick={playpreviousToggle}>
+              <FaStepBackward />
+            </button>
+            <button onClick={playPauseToggle}>
+              {isPlaying ? <IoPause /> : <IoPlay />}
+            </button>
+            <button onClick={playnextToggle}>
+              <FaStepForward />
+            </button>
+
             <input
               type="range"
               min={0}
@@ -170,47 +173,48 @@ const Videoplayer = ({ movies }) => {
               value={currentTime}
               onChange={(e) => handleSeek(e.target.value)}
             />
-            <span >
+            <span className="w-full">
               {currentTime.toFixed(2)} /{" "}
               {duration ? duration.toFixed(2) : (0.0).toFixed(2)}
             </span>
-            </div>
-            <span className="w-full px-2 font-semibold">
-              {currentTitle.title}
-            </span>
-          
+          </div>
+          <span className="w-fit sm:px-2 sm:py-0 pb-4 font-semibold">{currentTitle.title}</span>
         </div>
-        
-        <div className="w-full flex sm:flex-row flex-col justify-end gap-6 items-end ">
-        <div className="w-full">
-          <button onClick={autoPlay} className="flex flex-row justify-center items-center gap-2">
-            <FaRegPlayCircle />
-            {autoplay ? "Autoplay on" : "Autoplay off"}
-          </button>
-        </div>
-          <select
-            value={playbackSpeed}
-            onChange={(e) => handleSpeedChange(parseFloat(e.target.value))}
-            className="border border-black"
-          >
-            <option value={0.5}>0.5x</option>
-            <option value={1}>1x</option>
-            <option value={1.5}>1.5x</option>
-            <option value={2}>2x</option>
-          </select>
-          <button className="bg-slate-200 " onClick={toggleFullScreen}>
-            Full Screen
-          </button>
+
+        <div className="w-full flex sm:flex-row sm:justify-end gap-4 itmes-end ">
+          <div className="w-full flex sm:justify-end items-end">
+            <button
+              onClick={autoPlay}
+              className="flex flex-row justify-center items-center gap-2"
+            >
+              <FaRegPlayCircle />
+              {autoplay ? "Autoplay on" : "Autoplay off"}
+            </button>
+          </div>
+          <div className="w-full flex gap-2 justify-end items-end">
+            <select
+              value={playbackSpeed}
+              onChange={(e) => handleSpeedChange(parseFloat(e.target.value))}
+              className="border border-black"
+            >
+              <option value={0.5}>0.5x</option>
+              <option value={1}>1x</option>
+              <option value={1.5}>1.5x</option>
+              <option value={2}>2x</option>
+            </select>
+            <button className="bg-slate-200 " onClick={toggleFullScreen}>
+              Full Screen
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="p-6 w-full flex justify-start items-start" id="playlist">
+      <div className="w-full flex justify-start items-start" id="playlist">
         <Playlist
           playlist={playlist}
           setCurrentVideo={setCurrentVideo}
           setCurrentTitle={setCurrentTitle}
           setIsPlaying={setIsPlaying}
-         
         />
       </div>
     </div>
