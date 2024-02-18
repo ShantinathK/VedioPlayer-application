@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Videoplayer from './components/Videoplayer';
 import {exerciseOptions} from './database';
+import { FaSquareGithub } from "react-icons/fa6";
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
     //     //     Authorization: `Bearer ${accessToken}`
     //     //   }
     //     // });
-    //     // const response = await axios.get(apiUrl);
+
 
     //     const response = await axios.get(apiUrl);
     //     setmovies(response.data);
@@ -36,8 +37,15 @@ function App() {
   },[]);
     
   return (
-    <div className="m-4 min-h-screen bg-gray-100 flex justify-center items-start">
+    <div className="m-4 min-h-screen bg-gray-100 flex flex-col justify-center items-center gap-2">
       <Videoplayer movies = {movies}/>
+
+      <div className='flex justify-center items-center gap-2'>
+        <a href='https://github.com/ShantinathK/' className='text-4xl'>
+          <FaSquareGithub />
+        </a>
+        <h1>click here to access github</h1>
+      </div>
     </div>
   );
 }
