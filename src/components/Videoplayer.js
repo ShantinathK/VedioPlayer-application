@@ -64,10 +64,15 @@ const Videoplayer = ({ movies }) => {
   //function to start next vedio once current vedio ends
   const handleVideoEnd = () => {
     // Auto play next video in the playlist if available
+
+    const currentIndex = playlist.findIndex(
+      (video) => video.id === currentVideo.id
+    );
+    if (!autoPlay) {
+      setIsPlaying(false);
+      videoRef.current.pause();
+    }
     if (autoplay) {
-      const currentIndex = playlist.findIndex(
-        (video) => video.id === currentVideo.id
-      );
       if (currentIndex < playlist.length - 1) {
         setCurrentVideo(playlist[currentIndex + 1]);
         setCurrentTitle(playlist[currentIndex + 1]); // update title to display below vedio when next vedio is plyed
@@ -75,12 +80,34 @@ const Videoplayer = ({ movies }) => {
         setIsPlaying(true);
         if (isPlaying) {
           setTimeout(() => {
-            videoRef.current.play();
-          }, 2000);
+            if (videoRef.current) {
+              videoRef.current.play();
+            }
+          }, 500);
         }
       }
     }
   };
+  // pause when is tab switch
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        if (isPlaying) {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+      } else {
+        if (autoplay && currentVideo) {
+          videoRef.current.play();
+          setIsPlaying(true);
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [currentVideo, autoplay, isPlaying]);
 
   //for speed change of video playing
   const handleSpeedChange = (speed) => {
@@ -174,11 +201,13 @@ const Videoplayer = ({ movies }) => {
               onChange={(e) => handleSeek(e.target.value)}
             />
             <span className="w-full">
-              {currentTime.toFixed(2)} /{" "}
+              {currentTime.toFixed(2)}/{" "}
               {duration ? duration.toFixed(2) : (0.0).toFixed(2)}
             </span>
           </div>
-          <span className="w-fit sm:px-2 sm:py-0 pb-4 font-semibold">{currentTitle.title}</span>
+          <span className="w-fit sm:px-2 sm:py-0 pb-4 font-semibold">
+            {currentTitle.title}
+          </span>
         </div>
 
         <div className="w-full flex sm:flex-row sm:justify-end gap-4 itmes-end ">
